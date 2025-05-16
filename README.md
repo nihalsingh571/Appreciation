@@ -36,4 +36,4 @@ An interactive website built with React, Vite, and Tailwind CSS that features a 
 
 ## Live Demo
 
-Visit the live demo at [Netlify](https://your-site-name.netlify.app)
+Visit the live demo at [Netlify](https://nihalappreciation.netlify.app/)
