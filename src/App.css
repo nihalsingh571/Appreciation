@@ -1,188 +1,249 @@
-/* Background color */
+/* Base styles */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Theme styles */
 .bg-light-pink {
-  background-color: #ffd1dc;
-  background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 100%);
+  background-color: #fff5f7;
 }
 
-/* Chase Message */
-.chase-message {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ff69b4;
-  z-index: 1000;
-  border: 2px solid #ff69b4;
-  animation: bounce 1s infinite;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.5s ease-out forwards, bounce 1s infinite;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translate(-50%, -100%);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, 0);
-    opacity: 1;
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translate(-50%, 0);
-  }
-  50% {
-    transform: translate(-50%, -10px);
-  }
+.bg-gray-900 {
+  background-color: #111827;
+  color: white;
 }
 
 /* Neon box effect */
 .neon-box {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
   backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 0 20px rgba(255, 192, 203, 0.5),
-              0 0 40px rgba(255, 192, 203, 0.3),
-              0 0 60px rgba(255, 192, 203, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  animation: neonPulse 2s infinite;
-  transform: translateY(0);
+}
+
+/* Button styles */
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Theme toggle buttons */
+.theme-btn {
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  background: white;
+  cursor: pointer;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+}
+
+.theme-btn.light {
+  background: #fff5f7;
+}
+
+.theme-btn.dark {
+  background: #111827;
+  color: white;
+}
+
+.theme-btn.love {
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  color: white;
+}
+
+/* Mascot styles */
+.mascot {
+  font-size: 3rem;
+  text-align: center;
+  margin: 1rem 0;
   transition: transform 0.3s ease;
 }
 
-.neon-box:hover {
-  transform: translateY(-5px);
+.mascot.happy {
+  animation: bounce 0.5s ease infinite;
 }
 
-@keyframes neonPulse {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 192, 203, 0.5),
-                0 0 40px rgba(255, 192, 203, 0.3),
-                0 0 60px rgba(255, 192, 203, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 192, 203, 0.6),
-                0 0 50px rgba(255, 192, 203, 0.4),
-                0 0 70px rgba(255, 192, 203, 0.3);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 192, 203, 0.5),
-                0 0 40px rgba(255, 192, 203, 0.3),
-                0 0 60px rgba(255, 192, 203, 0.2);
-  }
+.mascot.laughing {
+  animation: shake 0.5s ease infinite;
+}
+
+/* Heart explosion animation */
+.heart-explosion {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.heart-particle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  animation: float-up 1s ease-out forwards;
+  animation-delay: var(--delay);
+  font-size: 1.5rem;
 }
 
 /* Floating emojis */
 .floating-emoji {
   position: absolute;
-  font-size: 2.5rem;
-  animation: float 6s ease-in-out infinite;
-  z-index: 1;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  font-size: 2rem;
+  animation: float 3s ease-in-out infinite;
+  opacity: 0.6;
 }
 
+/* Confession history */
+.confession-history {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.confession-card {
+  background: #fff5f7;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  border-left: 4px solid #ff69b4;
+}
+
+.confession-card .date {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.confession-card .message {
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+/* Chase message */
+.chase-message {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 105, 180, 0.9);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #ff69b4;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end),
+             blink-caret 0.75s step-end infinite;
+}
+
+/* Animations */
 @keyframes float {
-  0% {
-    transform: translateY(0) rotate(0deg);
+  0%, 100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-20px) rotate(10deg);
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
   }
 }
 
-/* Cute background pattern */
-.bg-pattern {
-  background-color: #ff69b4;
-  background-image: 
-    radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.2) 2%, transparent 0%),
-    radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.2) 2%, transparent 0%);
-  background-size: 100px 100px;
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-/* Button container */
-.button-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-  min-height: 60px;
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
 }
 
-/* Button styles */
-button {
-  position: relative;
-  overflow: hidden;
-  min-width: 120px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border: none;
-  outline: none;
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
 }
 
-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #ff69b4 }
 }
 
-button:hover::after {
-  width: 300px;
-  height: 300px;
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Fade in animation */
-@keyframes fadeIn {
+@keyframes slide-down {
   from {
+    transform: translateY(-100%);
     opacity: 0;
-    transform: scale(0.9) translateY(20px);
   }
   to {
+    transform: translateY(0);
     opacity: 1;
-    transform: scale(1) translateY(0);
   }
 }
 
+/* Utility classes */
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  animation: fade-in 0.5s ease-out;
 }
 
-/* Add a subtle 3D effect to the background */
-.min-h-screen {
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+.animate-slide-down {
+  animation: slide-down 0.5s ease-out;
 }
 
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
+/* Responsive design */
+@media (max-width: 640px) {
+  .neon-box {
+    margin: 1rem;
+    padding: 1rem;
   }
-  50% {
-    background-position: 100% 50%;
+
+  .button-container {
+    flex-direction: column;
   }
-  100% {
-    background-position: 0% 50%;
+
+  .confession-history {
+    position: static;
+    margin: 1rem;
+    max-width: none;
   }
 }
