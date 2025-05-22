@@ -31,47 +31,51 @@ function App() {
     setTimeout(() => setShowHearts(false), 3000)
   }
 
-  const handleNoHover = (e) => {
-    if (!noButtonRef.current) return
-
-    const button = noButtonRef.current
-    const buttonRect = button.getBoundingClientRect()
-    const windowWidth = window.innerWidth
-    const windowHeight = window.innerHeight
-
-    // Calculate new position with increasing difficulty
-    const difficulty = Math.min(hoverTime * 0.2, 1)
-    let newX = Math.random() * (windowWidth - buttonRect.width)
-    let newY = Math.random() * (windowHeight - buttonRect.height)
-
-    // Make it harder to catch as time goes on
+  const handleNoHover = () => {
+    if (!noButtonRef.current) return;
+  
+    const button = noButtonRef.current;
+    const container = button.parentElement;
+    const containerRect = container.getBoundingClientRect();
+  
+    const maxLeft = container.offsetWidth - button.offsetWidth;
+    const maxTop = container.offsetHeight - button.offsetHeight;
+  
+    const difficulty = Math.min(hoverTime * 0.2, 1);
+  
+    let newX = Math.random() * maxLeft;
+    let newY = Math.random() * maxTop;
+  
     if (difficulty > 0.5) {
-      newX = Math.random() > 0.5 ? 0 : windowWidth - buttonRect.width
-      newY = Math.random() > 0.5 ? 0 : windowHeight - buttonRect.height
+      newX = Math.random() > 0.5 ? 0 : maxLeft;
+      newY = Math.random() > 0.5 ? 0 : maxTop;
     }
-
-    button.style.position = 'fixed'
-    button.style.left = `${newX}px`
-    button.style.top = `${newY}px`
-
+  
+    button.style.position = 'absolute';
+    button.style.left = `${newX}px`;
+    button.style.top = `${newY}px`;
+    button.style.zIndex = 10;
+  
     if (!hoverTimerRef.current) {
       hoverTimerRef.current = setInterval(() => {
         setHoverTime(prev => {
           if (prev >= 10) {
-            setShowChaseMessage(true)
-            setMascotState('laughing')
-            clearInterval(hoverTimerRef.current)
+            setShowChaseMessage(true);
+            setMascotState('laughing');
+            clearInterval(hoverTimerRef.current);
+            hoverTimerRef.current = null;
             chaseTimerRef.current = setTimeout(() => {
-              setShowChaseMessage(false)
-              setMascotState('neutral')
-            }, 3000)
-            return 0
+              setShowChaseMessage(false);
+              setMascotState('neutral');
+            }, 3000);
+            return 0;
           }
-          return prev + 1
-        })
-      }, 1000)
+          return prev + 1;
+        });
+      }, 1000);
     }
-  }
+  };
+  
 
   const handleConfessionSubmit = () => {
     const newConfession = {
@@ -124,7 +128,7 @@ function App() {
           {mascotState === 'neutral' && '😊'}
         </div>
 
-        <div className="button-container relative">
+        <div className="button-container relative w-[300px] h-[120px] mx-auto">
           <button
             onClick={handleYesClick}
             className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
@@ -135,10 +139,12 @@ function App() {
             ref={noButtonRef}
             onMouseEnter={handleNoHover}
             onMouseLeave={handleNoLeave}
-            className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
+            className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 absolute"
+            style={{ zIndex: 10 }}
           >
             No
           </button>
+
         </div>
       </div>
 
